@@ -1,26 +1,11 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(InstructorHomeScreen());
-}
-
 class InstructorHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.purple,
-        hintColor: Colors.white,
-        appBarTheme: AppBarTheme(
-          color: Colors.purple,
-        ),
-
-      ),
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("Instructor Home"),
-
+          backgroundColor: Colors.purple,
           actions: [
             IconButton(
               icon: Icon(Icons.logout),
@@ -38,15 +23,21 @@ class InstructorHomeScreen extends StatelessWidget {
                 Navigator.of(context).pushNamed('/instructor_uploading');
               },),
               FeatureDrawerButton(icon: Icons.schedule, text: 'Scheduling', onTap: () {
-                Navigator.of(context).pushNamed('/instructor_scheduling'); },),
+                Navigator.of(context).pushNamed('/instructor_scheduling');
+                },),
               FeatureDrawerButton(icon: Icons.track_changes, text: 'Tracking', onTap: () {
                 Navigator.of(context).pushNamed('/instructor_tracking');
               },),
               FeatureDrawerButton(icon: Icons.live_help, text: 'Assistance Service', onTap: () {
-                Navigator.of(context).pushNamed('/assistance_service_student'); },),
+
+              },),
               FeatureDrawerButton(icon: Icons.info, text: 'About Us', onTap: () {
-                Navigator.of(context).pushNamed('/about_us'); },),
-              FeatureDrawerButton(icon: Icons.logout, text: 'Logout', onTap: () {  },),
+                Navigator.of(context).pushNamed('/about_us');
+                },),
+              FeatureDrawerButton(icon: Icons.logout, text: 'Logout', onTap: () {
+                Navigator.of(context).pushNamed('/login');
+              },),
+
             ],
           ),
         ),
@@ -61,10 +52,6 @@ class InstructorHomeScreen extends StatelessWidget {
                     Navigator.of(context).pushNamed('/instructor_uploading');
                   },),
                 ),
-                Expanded(
-                  child: FeatureButton(icon: Icons.book, text: 'Booking', onTap: () {
-                    Navigator.of(context).pushNamed('/instructor_booking'); },),
-                ),
               ],
             ),
             Row(
@@ -78,7 +65,7 @@ class InstructorHomeScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: FeatureButton(icon: Icons.track_changes, text: 'Tracking', onTap: () {
-                    Navigator.of(context).pushNamed('/learner_tracking');
+                    Navigator.of(context).pushNamed('/instructor_tracking');
                   },),
                 ),
               ],
@@ -88,17 +75,13 @@ class InstructorHomeScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: FeatureButton(icon: Icons.live_help, text: 'Assistance Service', onTap: () {
-                    Navigator.of(context).pushNamed('/assistance_service_student'); },),
-                ),
-                Expanded(
-                  child: FeatureButton(icon: Icons.info, text: 'About Us', onTap: () {
-                    Navigator.of(context).pushNamed('/about_us'); },),
+                   },),
                 ),
               ],
             ),
           ],
         ),
-      ),
+
     );
   }
 }
@@ -163,8 +146,6 @@ class FeatureDrawerButton extends StatelessWidget {
   final IconData icon;
   final String text;
   final Function() onTap;
-
-
 
   FeatureDrawerButton({
     required this.icon,

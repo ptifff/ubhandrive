@@ -5,22 +5,11 @@ import 'instructor_homescreen.dart';
 import 'login.dart';
 import 'login_student.dart';
 
-void main() {
-  runApp(SelectionScreen());
-}
+
 class SelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.purple,
-        hintColor: Colors.white,
-        appBarTheme: AppBarTheme(
-          color: Colors.purple,
-        ),
-      ),
-      home: Scaffold(
+    return Scaffold(
           appBar: AppBar(
             title: Text('Panel Selection'),
           ),
@@ -65,7 +54,7 @@ class SelectionScreen extends StatelessWidget {
               ],
             ),
           )
-      ),
+
     );
   }
 }

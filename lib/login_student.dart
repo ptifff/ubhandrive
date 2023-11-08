@@ -4,9 +4,6 @@ import 'signup.dart';
 import 'homeScreen.dart';
 import 'signup_student.dart';
 
-void main() {
-  runApp(StudentLogin());
-}
 
 class StudentLogin extends StatefulWidget {
   @override

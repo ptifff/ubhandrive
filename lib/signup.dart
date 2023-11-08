@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'helper.dart';
 import 'login.dart';
 
 void main() {
@@ -10,167 +11,147 @@ void main() {
 class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.purple,
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: AppBarTheme(
-          color: Colors.purple,
-        ),
-      ),
-      home: Scaffold(
+    return Scaffold(
+
         appBar: AppBar(
           title: Text('Sign Up'),
         ),
-        body: SignUpForm(),
-      ),
+        body: InstructorRegister(),
+
     );
   }
 }
 
-class SignUpForm extends StatefulWidget {
-  @override
-  _SignUpFormState createState() => _SignUpFormState();
-}
+class InstructorRegister extends StatelessWidget {
+AuthService authService = AuthService();
 
-class _SignUpFormState extends State<SignUpForm> {
-  final _formKey = GlobalKey<FormState>();
-
-  String email = '';
-  String firstName = '';
-  String lastName = '';
-  String password = '';
-
-  void navigateToSignUpSuccessScreen() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => SignupSuccessScreen(),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(16.0),
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    body: Padding(
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: Form(
-        key: _formKey,
+
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Email'),
-              onChanged: (value) {
-                setState(() {
-                  email = value;
-                });
-              },
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your email';
-                } else if (!value!.contains('@gmail.com')) {
-                  return 'Email must contain @gmail.com';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 12.0),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'First Name'),
-              onChanged: (value) {
-                setState(() {
-                  firstName = value;
-                });
-              },
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your first name';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 12.0),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Last Name'),
-              onChanged: (value) {
-                setState(() {
-                  lastName = value;
-                });
-              },
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your last name';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 12.0),
-
-            SizedBox(height: 12.0),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Password'),
-              onChanged: (value) {
-                setState(() {
-                  password = value;
-                });
-              },
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your password';
-                } else if (value.length < 8) {
-                  return 'Password must be at least 8 characters long';
-                }
-
-                return null;
-              },
-              obscureText: true,
-            ),
-
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  // Perform signup logic here
-                  // You can access the form values using the variables defined above.
-                  // Example: firstName, lastName, cnic, dob, address, email, password, role
-
-                  // After successful signup, navigate to the success screen
-                  navigateToSignUpSuccessScreen();
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.purple,
-                onPrimary: Colors.white,
+            Text(
+              "Register Your Account",
+              style: TextStyle(
+                color: Colors.lightBlue,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
-              child: Text('Sign Up'),
             ),
+            SizedBox(
+              height: 16.0,
+            ),
+            TextFormField(
+              controller: authService.firstname,
+              decoration: InputDecoration(
+                hintText: "First Name",
+                hintStyle: TextStyle(
+                  color: Colors.blue,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+
+            ),
+            SizedBox(
+              height: 16.0,
+            ),
+            TextFormField(
+              controller: authService.lastname,
+              decoration: InputDecoration(
+                hintText: "Last Name",
+                hintStyle: TextStyle(
+                  color: Colors.blue,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+
+            ),
+            SizedBox(
+              height: 16.0,
+            ),
+            TextFormField(
+              controller: authService.email,
+              decoration: InputDecoration(
+                hintText: "E-Mail",
+                hintStyle: TextStyle(
+                  color: Colors.blue,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 16.0,
+            ),
+            TextFormField(
+              controller: authService.password,
+              decoration: InputDecoration(
+                hintText: "Password",
+                hintStyle: TextStyle(
+                  color: Colors.blue,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+
+            ),
+            SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+                style: TextButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 70)),
+                onPressed: () {
+                  if(authService.email != "" && authService.password != ""){
+                    authService.InstructorRegister(context);
+                  }
+                },
+                child: Text("Register")),
+            TextButton(
+              onPressed: () {
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+              },
+              child: Text("Already have an account? Login"),
+            )
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
 }
-
-class SignupSuccessScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // Use a Timer to navigate after 4 seconds
-    Timer(Duration(seconds: 4), () {
-      // Push the Login screen onto the stack
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (BuildContext context) => LoginScreen(),
-        ),
-      );
-    });
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Signup Success'),
-      ),
-      body: Center(
-        child: Text('Congratulations! Your signup was successful.'),
-      ),
-    );
-  }
 }
+// class SignupSuccessScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     // Use a Timer to navigate after 4 seconds
+    // Timer(Duration(seconds: 4), () {
+    //   // Push the Login screen onto the stack
+    //   Navigator.of(context).pushReplacement(
+    //     MaterialPageRoute(
+    //       builder: (BuildContext context) => LoginScreen(),
+    //     ),
+    //   );
+    // });
+//
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Signup Success'),
+//       ),
+//       body: Center(
+//         child: Text('Congratulations! Your signup was successful.'),
+//       ),
+//     );
+//   }
+// }

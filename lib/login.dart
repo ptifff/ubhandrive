@@ -1,194 +1,80 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'helper.dart';
 import 'instructor_homescreen.dart';
 import 'signup.dart';
-import 'homeScreen.dart';
 
-void main() {
-  runApp(LoginScreen());
-}
-class LoginScreen extends StatefulWidget {
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
 
-class _LoginScreenState extends State<LoginScreen> {
-  // ... (Your existing LoginScreen code here)
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-  void _login() {
-    String email = emailController.text;
-    String password = passwordController.text;
-
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => InstructorHomeScreen(),
-      ),
-    );
-  }
-
-  void _signUp() {
-    // Navigate to the signup screen
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SignUpScreen()),
-    );
-  }
-
+class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          color: Colors.grey[300],
+      body: Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        child: Form(
+
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 140,
-              ),
-              Center(
-                child: Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 32,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 32,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Text(
-                  'Email',
-                  style: TextStyle(color: Colors.purple),
-                ),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Container(
-                  decoration: BoxDecoration(
+              Text(
+                "Login Your Account",
+                style: TextStyle(
                     color: Colors.purple,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.purple,
-                        blurRadius: 8,
-                        offset: Offset(1, 1),
-                      ),
-                    ],
-                  ),
-                  child: TextField(
-                    controller: emailController,
-                    style: TextStyle(color: Colors.purple),
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide.none,
-                      ),
-                      prefixIcon: Icon(Icons.email),
-                      prefixIconColor: Colors.white,
-                      hintText: 'Enter your email',
-                      hintStyle: TextStyle(
-                        color: Colors.white54,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 32),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Text(
-                  'Password',
-                  style: TextStyle(color: Colors.purple),
-                ),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               ),
               SizedBox(
-                height: 8,
+                height: 16.0,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Container(
-                  decoration: BoxDecoration(
+              TextFormField(
+
+                decoration: InputDecoration(
+                  hintText: "E-Mail",
+                  hintStyle: TextStyle(
                     color: Colors.purple,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.purple,
-                        blurRadius: 8,
-                        offset: Offset(1, 1),
-                      ),
-                    ],
                   ),
-                  child: TextField(
-                    controller: passwordController,
-                    style: TextStyle(color: Colors.black),
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide.none,
-                      ),
-                      prefixIcon: Icon(Icons.lock),
-                      prefixIconColor: Colors.white,
-                      hintText: 'Enter your password',
-                      hintStyle: TextStyle(
-                        color: Colors.white54,
-                      ),
-                    ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
+
               ),
-              SizedBox(height: 64),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Container(
-                  width: 5,
-                  height: 48,
-                  child: ElevatedButton(
-                    onPressed: _login,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    child: Text('Login'),
+              SizedBox(
+                height: 16.0,
+              ),
+              TextFormField(
+
+                decoration: InputDecoration(
+                  hintText: "Password",
+                  hintStyle: TextStyle(
+                    color: Colors.purple,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
+                // Apply password validation
               ),
-              SizedBox(height: 16), // Added spacing between Login and SignUp buttons
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Container(
-                  width: 5,
-                  height: 48,
-                  child: ElevatedButton(
-                    onPressed: _signUp,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    child: Text('Sign Up'),
-                  ),
-                ),
+              SizedBox(
+                height: 16.0,
               ),
-              SizedBox(height: 32),
+              ElevatedButton(
+                  style: TextButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 70)),
+                  onPressed: () {
+
+                  },
+                  child: Text("LogIn")),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+                },
+                child: Text("Don't have an account? SignUp"),
+              ),
+
             ],
           ),
         ),
@@ -196,4 +82,114 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+// class InstructorRegister extends StatelessWidget {
+//   AuthService authService = AuthService();
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Padding(
+//         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+//         child: Form(
+//
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               Text(
+//                 "Register Your Account",
+//                 style: TextStyle(
+//                   color: Colors.lightBlue,
+//                   fontSize: 20,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//               ),
+//               SizedBox(
+//                 height: 16.0,
+//               ),
+//               TextFormField(
+//                 controller: authService.firstname,
+//                 decoration: InputDecoration(
+//                   hintText: "First Name",
+//                   hintStyle: TextStyle(
+//                     color: Colors.blue,
+//                   ),
+//                   border: OutlineInputBorder(
+//                     borderRadius: BorderRadius.circular(10),
+//                   ),
+//                 ),
+//
+//               ),
+//               SizedBox(
+//                 height: 16.0,
+//               ),
+//               TextFormField(
+//                 controller: authService.lastname,
+//                 decoration: InputDecoration(
+//                   hintText: "Last Name",
+//                   hintStyle: TextStyle(
+//                     color: Colors.blue,
+//                   ),
+//                   border: OutlineInputBorder(
+//                     borderRadius: BorderRadius.circular(10),
+//                   ),
+//                 ),
+//
+//               ),
+//               SizedBox(
+//                 height: 16.0,
+//               ),
+//               TextFormField(
+//                 controller: authService.email,
+//                 decoration: InputDecoration(
+//                   hintText: "E-Mail",
+//                   hintStyle: TextStyle(
+//                     color: Colors.blue,
+//                   ),
+//                   border: OutlineInputBorder(
+//                     borderRadius: BorderRadius.circular(10),
+//                   ),
+//                 ),
+//               ),
+//               SizedBox(
+//                 height: 16.0,
+//               ),
+//               TextFormField(
+//                 controller: authService.password,
+//                 decoration: InputDecoration(
+//                   hintText: "Password",
+//                   hintStyle: TextStyle(
+//                     color: Colors.blue,
+//                   ),
+//                   border: OutlineInputBorder(
+//                     borderRadius: BorderRadius.circular(10),
+//                   ),
+//                 ),
+//
+//               ),
+//               SizedBox(
+//                 height: 16.0,
+//               ),
+//               ElevatedButton(
+//                   style: TextButton.styleFrom(
+//                       padding: EdgeInsets.symmetric(horizontal: 70)),
+//                   onPressed: () {
+//                     if(authService.email != "" && authService.password != ""){
+//                       authService.InstructorRegister(context);
+//                     }
+//                   },
+//                   child: Text("Register")),
+//               TextButton(
+//                 onPressed: () {
+//                   // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+//                 },
+//                 child: Text("Already have an account? Login"),
+//               )
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 

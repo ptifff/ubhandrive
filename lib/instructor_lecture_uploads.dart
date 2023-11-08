@@ -1,18 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: InstructorUploadScreen(),
-    );
-  }
-}
 
 class InstructorUploadScreen extends StatefulWidget {
   @override
@@ -49,6 +37,30 @@ class _InstructorUploadScreenState extends State<InstructorUploadScreen> {
       appBar: AppBar(
         title: Text('Instructor Upload Screen'),
         backgroundColor: Colors.purple,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            FeatureDrawerButton(icon: Icons.school, text: 'Learning', onTap: () {
+              Navigator.of(context).pushNamed('/instructor_uploading');
+            },),
+            FeatureDrawerButton(icon: Icons.schedule, text: 'Scheduling', onTap: () {
+              Navigator.of(context).pushNamed('/instructor_scheduling');
+            },),
+            FeatureDrawerButton(icon: Icons.track_changes, text: 'Tracking', onTap: () {
+              Navigator.of(context).pushNamed('/instructor_tracking');
+            },),
+            FeatureDrawerButton(icon: Icons.live_help, text: 'Assistance Service', onTap: () {
+            },),
+            FeatureDrawerButton(icon: Icons.info, text: 'About Us', onTap: () {
+              Navigator.of(context).pushNamed('/about_us');
+            },),
+            FeatureDrawerButton(icon: Icons.logout, text: 'Logout', onTap: () {
+              Navigator.of(context).pushNamed('/login');
+            },),
+
+          ],
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -112,3 +124,34 @@ class _InstructorUploadScreenState extends State<InstructorUploadScreen> {
   }
 }
 
+class FeatureDrawerButton extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final Function() onTap;
+
+
+
+  FeatureDrawerButton({
+    required this.icon,
+    required this.text,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+        leading: Icon(
+          icon,
+          color: Theme.of(context).primaryColor,
+        ),
+        title: Text(
+          text,
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontSize: 18.0,
+          ),
+        ),
+        onTap: onTap
+    );
+  }
+}

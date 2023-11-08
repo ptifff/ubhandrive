@@ -12,20 +12,13 @@ void main() {
 class StudentSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.purple,
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: AppBarTheme(
-          color: Colors.purple,
-        ),
-      ),
-      home: Scaffold(
+    return Scaffold(
+
         appBar: AppBar(
           title: Text('Student Sign Up'),
         ),
         body: SignUpForm(),
-      ),
+
     );
   }
 }
