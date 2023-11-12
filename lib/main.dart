@@ -1,4 +1,3 @@
-
 import 'package:drive_ubhan/login.dart';
 import 'package:drive_ubhan/signup.dart';
 import 'package:drive_ubhan/splash_screen.dart';
@@ -19,14 +18,14 @@ import 'learner_tracking.dart';
 import 'learning_material.dart';
 import 'login_student.dart';
 import 'selection_screen.dart';
+import 'firebase_options.dart';
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-         '/': (context) => SplashScreen(),
+        '/': (context) => SplashScreen(),
         '/login': (context) => LoginScreen(),
         '/login_student': (context) => StudentLogin(),
         '/signup': (context) => InstructorRegister(),
@@ -43,7 +42,8 @@ class MyApp extends StatelessWidget {
         '/booking': (context) => InstructorSelection(),
         '/learner_scheduling': (context) => learnerscheduling(),
         '/learner_tracking': (context) => learnertracking(),
-        '/instructor_booking': (context) => instructorbooking(),// You can pass actual data here
+        '/instructor_booking': (context) => instructorbooking(),
+        // You can pass actual data here
         '/assistance_service_student': (context) => AssistanceServiceScreen(),
         '/about_us': (context) => AboutUsScreen(),
         //instructor panel routing
@@ -52,11 +52,7 @@ class MyApp extends StatelessWidget {
         '/instructor_lectures_uploads': (context) => InstructorUploadScreen(),
         '/instructor_tracking': (context) => instructortracking(),
         '/instructor_scheduling': (context) => instructorscheduling(),
-
-
-
       },
     );
   }
 }
-
