@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'homeScreen.dart';
 import 'instructor_homescreen.dart';
-import 'login.dart';
-import 'login_student.dart';
+import 'login_instructor.dart';
+import 'student_login.dart';
 
 
 class SelectionScreen extends StatelessWidget {
@@ -73,7 +73,7 @@ class PanelCard extends StatelessWidget {
     if (label == 'Instructor') {
       // Navigate to the Instructor screen.
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+        MaterialPageRoute(builder: (context) => Login()),
       );
     } else if (label == 'Student') {
       // Navigate to the Student screen.

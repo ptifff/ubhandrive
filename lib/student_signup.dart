@@ -3,25 +3,24 @@ import 'package:flutter/material.dart';
 import 'helper.dart';
 
 void main() {
-  runApp(SignUpScreen());
+  runApp(StudentSignUpScreen());
 }
 
-class SignUpScreen extends StatelessWidget {
+class StudentSignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(' Instructor Sign Up'),
+        title: Text(' Student Sign Up'),
         backgroundColor: Colors.purple,
-
       ),
-      body: InstructorRegister(),
+      body: StudentRegister(),
     );
   }
 }
 
-class InstructorRegister extends StatelessWidget {
-  AuthService authService = AuthService();
+class StudentRegister extends StatelessWidget {
+  StudentAuthService authService = StudentAuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class InstructorRegister extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
         child: Form(
-          child: SingleChildScrollView( // Wrap with SingleChildScrollView
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +45,7 @@ class InstructorRegister extends StatelessWidget {
                   height: 16.0,
                 ),
                 TextFormField(
-                  controller: authService.firstname,
+                  controller: authService.stufirstname,
                   decoration: InputDecoration(
                     hintText: "First Name",
                     hintStyle: TextStyle(
@@ -61,7 +60,7 @@ class InstructorRegister extends StatelessWidget {
                   height: 16.0,
                 ),
                 TextFormField(
-                  controller: authService.lastname,
+                  controller: authService.stulastname,
                   decoration: InputDecoration(
                     hintText: "Last Name",
                     hintStyle: TextStyle(
@@ -76,7 +75,7 @@ class InstructorRegister extends StatelessWidget {
                   height: 16.0,
                 ),
                 TextFormField(
-                  controller: authService.email,
+                  controller: authService.stuemail,
                   decoration: InputDecoration(
                     hintText: "E-Mail",
                     hintStyle: TextStyle(
@@ -91,7 +90,7 @@ class InstructorRegister extends StatelessWidget {
                   height: 16.0,
                 ),
                 TextFormField(
-                  controller: authService.password,
+                  controller: authService.stupassword,
                   decoration: InputDecoration(
                     hintText: "Password",
                     hintStyle: TextStyle(
@@ -114,8 +113,8 @@ class InstructorRegister extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    if (authService.email != "" && authService.password != "") {
-                      authService.InstructorRegister(context);
+                    if (authService.stuemail != "" && authService.stupassword != "") {
+                      authService.StudentRegister(context);
                     }
                   },
                   child: Text("Register"),
@@ -126,7 +125,7 @@ class InstructorRegister extends StatelessWidget {
                   },
                   child: Text("Already have an account? Login",
                     style: TextStyle(
-                      color: Colors.purple, // Set text color to purple
+                      color: Colors.purple,
                     ),
                   ),
                 )
