@@ -1,9 +1,6 @@
+import 'dart:async';
 
 import 'package:flutter/material.dart';
-import'package:firebase_analytics/firebase_analytics.dart';
-import'package:firebase_analytics/observer.dart';
-
-import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
@@ -11,100 +8,6 @@ import 'package:location/location.dart';
 
 import 'consts.dart';
 
-
-
-class instructortracking extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('tracking'),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.logout),
-              onPressed: () {
-                // Implement logout functionality here
-              },
-            ),
-          ],
-        ),
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              FeatureDrawerButton(icon: Icons.school, text: 'Learning', onTap: () {
-                Navigator.of(context).pushNamed('/instructor_uploading');
-              },),
-              FeatureDrawerButton(icon: Icons.schedule, text: 'Scheduling', onTap: () {
-                Navigator.of(context).pushNamed('/instructor_scheduling');
-              },),
-              FeatureDrawerButton(icon: Icons.track_changes, text: 'Tracking', onTap: () {
-                Navigator.of(context).pushNamed('/instructor_tracking');
-              },),
-              FeatureDrawerButton(icon: Icons.live_help, text: 'Assistance Service', onTap: () {
-
-              },),
-              FeatureDrawerButton(icon: Icons.info, text: 'About Us', onTap: () {
-                Navigator.of(context).pushNamed('/about_us');
-              },),
-              FeatureDrawerButton(icon: Icons.logout, text: 'Logout', onTap: () {
-                Navigator.of(context).pushNamed('/login');
-              },),
-              FeatureDrawerButton(
-                icon: Icons.home,
-                text: 'Go to Home Page',
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MapPage(),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        )
-    );
-  }
-}
-class FeatureDrawerButton extends StatelessWidget {
-  final IconData icon;
-  final String text;
-  final Function() onTap;
-
-
-
-  FeatureDrawerButton({
-    required this.icon,
-    required this.text,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-        leading: Icon(
-          icon,
-          color: Theme.of(context).primaryColor,
-        ),
-        title: Text(
-          text,
-          style: TextStyle(
-            color: Theme.of(context).primaryColor,
-            fontSize: 18.0,
-          ),
-        ),
-        onTap: onTap
-    );
-  }
-}
-
-
-
-
-// void main() {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   runApp(MyApp());
-// }
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
 
