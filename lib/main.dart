@@ -17,6 +17,7 @@ import 'learner_scheduling.dart';
 import 'learner_tracking.dart';
 import 'learning_material.dart';
 import 'login_student.dart';
+import 'quiz/home.dart';
 import 'selection_screen.dart';
 import 'firebase_options.dart';
 
@@ -52,6 +53,9 @@ class MyApp extends StatelessWidget {
         '/instructor_lectures_uploads': (context) => InstructorUploadScreen(),
         '/instructor_tracking': (context) => instructortracking(),
         '/instructor_scheduling': (context) => instructorscheduling(),
+        '/home': (context) => Home(),
+
+
       },
     );
   }

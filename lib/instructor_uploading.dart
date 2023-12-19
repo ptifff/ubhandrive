@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'instructor_lecture_uploads.dart';
+import 'quiz/home.dart';
+
 class InstructorTopicSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -81,16 +84,16 @@ class PanelCard extends StatelessWidget {
   void _handlePanelTap(BuildContext context) {
     // Add your desired action here when the panel is tapped.
     // For example, you can navigate to a new screen.
-    if (label == 'Instructor') {
+    if (label == 'Lectures') {
       // // Navigate to the Instructor screen.
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(builder: (context) => LoginScreen()),
-      // );
-    } else if (label == 'Student') {
+       Navigator.of(context).push(
+       MaterialPageRoute(builder: (context) => InstructorUploadScreen()),
+       );
+    } else if (label == 'Quizzes') {
       // // Navigate to the Student screen.
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(builder: (context) => StudentLogin()),
-      // );
+       Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => Home()),
+       );
     }
   }
 

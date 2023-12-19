@@ -3,40 +3,32 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-
 import 'package:location/location.dart';
 
-import 'consts.dart';
+import 'consts.dart'; // Assuming you have a file named consts.dart for constants.
 
 class MapPage extends StatefulWidget {
-  const MapPage({super.key});
+  const MapPage({Key? key}) : super(key: key);
 
   @override
   State<MapPage> createState() => _MapPageState();
 }
 
 class _MapPageState extends State<MapPage> {
-  Location _locationController = new Location();
-
+  final Location _locationController = Location();
   final Completer<GoogleMapController> _mapController =
   Completer<GoogleMapController>();
 
   static const LatLng _pGooglePlex = LatLng(37.4223, -122.0848);
   static const LatLng _pApplePark = LatLng(37.3346, -122.0090);
-  LatLng? _currentP = null;
+  LatLng? _currentP;
 
   Map<PolylineId, Polyline> polylines = {};
 
   @override
   void initState() {
     super.initState();
-    getLocationUpdates().then(
-          (_) => {
-        getPolylinePoints().then((coordinates) => {
-          generatePolyLineFromPoints(coordinates),
-        }),
-      },
-    );
+    getLocationUpdates();
   }
 
   @override
@@ -47,8 +39,8 @@ class _MapPageState extends State<MapPage> {
         child: Text("Loading..."),
       )
           : GoogleMap(
-        onMapCreated: ((GoogleMapController controller) =>
-            _mapController.complete(controller)),
+        onMapCreated: (GoogleMapController controller) =>
+            _mapController.complete(controller),
         initialCameraPosition: CameraPosition(
           target: _pGooglePlex,
           zoom: 13,
@@ -64,7 +56,7 @@ class _MapPageState extends State<MapPage> {
               icon: BitmapDescriptor.defaultMarker,
               position: _pGooglePlex),
           Marker(
-              markerId: MarkerId("_destionationLocation"),
+              markerId: MarkerId("_destinationLocation"),
               icon: BitmapDescriptor.defaultMarker,
               position: _pApplePark)
         },
@@ -135,7 +127,7 @@ class _MapPageState extends State<MapPage> {
     return polylineCoordinates;
   }
 
-  void generatePolyLineFromPoints(List<LatLng> polylineCoordinates) async {
+  void generatePolyLineFromPoints(List<LatLng> polylineCoordinates) {
     PolylineId id = PolylineId("poly");
     Polyline polyline = Polyline(
         polylineId: id,
